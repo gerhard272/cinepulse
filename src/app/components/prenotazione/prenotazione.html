@@ -1,0 +1,41 @@
+<form [formGroup]="bookingForm">
+
+  <!-- Selezione Data & Ora -->
+  <div class="form-group">
+    <label for="showtimeSelect" class="form-label">Data e Orario Spettacolo</label>
+    <select id="showtimeSelect" formControlName="showtimeId" class="form-select">
+      <option value="" disabled>-- Seleziona orario --</option>
+      @for (st of showtimes(); track st.id) {
+        <option [value]="st.id">
+          {{ st.title }} — {{ st.date }} {{ st.time }} | {{ st.hall }} ({{ st.availableSeats }} posti)
+        </option>
+      }
+    </select>
+    @if (bookingForm.get('showtimeId')?.invalid && bookingForm.get('showtimeId')?.touched) {
+      <span class="error-msg">Seleziona un orario valido.</span>
+    }
+  </div>
+
+  <!-- Selezione Tipo Biglietto -->
+  <div class="form-group">
+    <label class="form-label">Tipo Biglietto</label>
+    <div class="radio-grid">
+      @for (option of ticketOptions; track option.value) {
+        <label class="radio-card" [class.selected]="bookingForm.get('ticketType')?.value === option.value">
+          <input type="radio" formControlName="ticketType" [value]="option.value" class="radio-input" />
+          <div class="radio-content">
+            <span class="ticket-title">{{ option.label }}</span>
+            <span class="ticket-price">
+              @if (selectedShowtime(); as st) {
+                {{ st.prices[option.value] | currency:'EUR':'it-IT' }}
+              } @else {
+                --
+              }
+            </span>
+          </div>
+        </label>
+      }
+    </div>
+  </div>
+
+</form>
