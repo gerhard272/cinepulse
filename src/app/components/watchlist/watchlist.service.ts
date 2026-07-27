@@ -10,12 +10,11 @@ export class WatchlistService {
   public readonly watchlist = computed(() => this.watchlistSignal());
   public readonly isWatchlistEmpty = computed(() => this.watchlistSignal().length === 0);
 
-  constructor() {
-    this.watchlistSignal.set([
-      { movieId: '1', addedAt: 'Oggi alle 18:30' },
-      { movieId: '2', addedAt: 'Ieri alle 20:00' },
-    ]);
+  isInWatchlist(movieId: string): boolean {
+    return this.watchlistSignal().some(item => item.movieId === movieId);
   }
+
+  constructor() {}
 
   addToWatchlist(item: WatchlistItem) {
     this.watchlistSignal.update(items => [...items, item]);

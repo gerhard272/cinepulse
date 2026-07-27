@@ -12,6 +12,7 @@ import { Movie } from '../../../models/models';
 })
 export class MovieCard {
   @Input({ required: true }) movie!: Movie;
+  @Input() isInWatchlist = false;
   @Output() addToWatchlist = new EventEmitter<string>();
 
   onAddToWatchlist(event: Event): void {
