@@ -5,18 +5,18 @@ import { WatchlistItem } from '../../models/models';
   providedIn: 'root'
 })
 export class WatchlistService {
-  // Signal per lo stato della watchlist
   private watchlistSignal = signal<WatchlistItem[]>([]);
 
-  // Computed per esporre la lista (read-only)
   public readonly watchlist = computed(() => this.watchlistSignal());
-
-  // Computed per verificare se la watchlist è vuota
   public readonly isWatchlistEmpty = computed(() => this.watchlistSignal().length === 0);
 
-  constructor() {}
+  constructor() {
+    this.watchlistSignal.set([
+      { movieId: '1', addedAt: 'Oggi alle 18:30' },
+      { movieId: '2', addedAt: 'Ieri alle 20:00' },
+    ]);
+  }
 
-  // Metodi per aggiornare lo stato
   addToWatchlist(item: WatchlistItem) {
     this.watchlistSignal.update(items => [...items, item]);
   }

@@ -44,9 +44,9 @@
         <label for="movieId">Relativo al film</label>
         <select id="movieId" formControlName="movieId">
           <option value="" disabled selected>Seleziona un film</option>
-          <option value="film-1">Il Padrino</option>
-          <option value="film-2">Pulp Fiction</option>
-          <option value="film-3">Inception</option>
+          @for (movie of movieOptions(); track movie.id) {
+            <option [value]="movie.id">{{ movie.title | titlecase }}</option>
+          }
         </select>
 
         @if (segnalaForm.get('movieId')?.invalid && segnalaForm.get('movieId')?.touched) {
@@ -57,6 +57,13 @@
           </div>
         }
       </div>
+
+      @if (selectedMovie()) {
+        <div class="movie-preview">
+          <h3>Film selezionato</h3>
+          <app-movie-card [movie]="selectedMovie()!" (addToWatchlist)="onSelectMovie($event)"></app-movie-card>
+        </div>
+      }
 
       <!-- Radio Tipo -->
       <div class="form-group">
