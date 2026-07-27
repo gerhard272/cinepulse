@@ -1,3 +1,4 @@
+// SCRUM-19
 import { Component, inject } from '@angular/core';
 import { WatchlistService } from './watchlist.service';
 
