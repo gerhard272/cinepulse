@@ -12,7 +12,7 @@ import { Showtime } from '../../models/showtime';
   templateUrl: './prenotazione.html',
   styleUrl: './prenotazione.css',
 })
-export class PrenotazioneComponent implements OnInit {
+export class Prenotazione implements OnInit {
   private fb = inject(FormBuilder);
   private service = inject(PrenotazioneService);
   private route = inject(ActivatedRoute);
