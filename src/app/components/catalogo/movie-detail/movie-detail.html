@@ -1,0 +1,74 @@
+<div class="detail-container">
+  @if (loading()) {
+    <div class="loading-state">Caricamento...</div>
+  }
+
+  @if (movie(); as film) {
+    <a routerLink="/catalogo" class="back-link">&larr; Torna al Catalogo</a>
+
+    <div class="movie-header">
+      <div class="poster-wrapper">
+        <img
+          [src]="film.posterUrl || 'https://via.placeholder.com/500x750?text=No+Poster'"
+          [alt]="film.title"
+          class="poster"
+        />
+      </div>
+      <div class="movie-info">
+        <h1 class="title">{{ film.title | titlecase }}</h1>
+        <p class="meta">
+          <span>{{ film.genre }}</span>
+          <span class="separator">&middot;</span>
+          <span>{{ film.releaseYear }}</span>
+          <span class="separator">&middot;</span>
+          <span>{{ film.availability === 'both' ? 'Cinema & Streaming' : (film.availability | titlecase) }}</span>
+        </p>
+        @if (film.rating) {
+          <div class="rating">
+            <span class="star">&#9733;</span>
+            <span class="rating-value">{{ film.rating }}</span>
+            <span class="rating-max">/10</span>
+          </div>
+        }
+        <a [routerLink]="['/movies', film.id, 'prenota']" class="book-btn">Prenota Ora &rarr;</a>
+      </div>
+    </div>
+
+    @if (film.synopsis) {
+      <section class="section">
+        <h2>Sinossi</h2>
+        <p class="synopsis-text">{{ film.synopsis }}</p>
+      </section>
+    }
+
+    @if (film.cast && film.cast.length > 0) {
+      <section class="section">
+        <h2>Cast</h2>
+        <ul class="cast-list">
+          @for (actor of film.cast; track actor) {
+            <li class="cast-item">{{ actor }}</li>
+          }
+        </ul>
+      </section>
+    }
+
+    @if (film.trailerUrl) {
+      <section class="section">
+        <h2>Trailer</h2>
+        <div class="trailer-wrapper">
+          <iframe
+            [src]="sanitizeUrl(film.trailerUrl)"
+            title="Trailer di {{ film.title }}"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+      </section>
+    }
+  }
+
+  @if (!loading() && !movie()) {
+    <div class="not-found-state">Film non trovato.</div>
+  }
+</div>
