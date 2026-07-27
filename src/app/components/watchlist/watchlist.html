@@ -6,14 +6,16 @@
       <p>La tua watchlist è vuota. Aggiungi qualche contenuto per ritrovarlo qui!</p>
     </div>
   } @else {
-    <ul class="watchlist-list">
-      @for (item of watchlistService.watchlist(); track item.movieId) {
-        <li class="watchlist-item">
-          <p>Movie ID: {{ item.movieId }}</p>
-          <p>Aggiunto il: {{ item.addedAt }}</p>
-          <button (click)="watchlistService.removeFromWatchlist(item.movieId)">Rimuovi</button>
-        </li>
+    <div class="watchlist-grid">
+      @for (item of watchlistMovies; track item.movieId) {
+        <div class="watchlist-card">
+          <app-movie-card [movie]="item.movie!" (addToWatchlist)="onRemoveFromWatchlist($event)"></app-movie-card>
+          <div class="watchlist-meta">
+            <span>Aggiunto il: {{ item.addedAt }}</span>
+            <button type="button" (click)="onRemoveFromWatchlist(item.movieId)">Rimuovi</button>
+          </div>
+        </div>
       }
-    </ul>
+    </div>
   }
 </div>
