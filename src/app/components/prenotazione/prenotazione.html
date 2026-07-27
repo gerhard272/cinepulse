@@ -38,4 +38,24 @@
     </div>
   </div>
 
+  <!-- Selezione Numero Posti -->
+  <div class="form-group">
+    <label class="form-label">
+      Numero Posti
+      @if (selectedShowtime(); as st) {
+        <span style="font-weight:400; color:#64748b;">(max {{ st.availableSeats }})</span>
+      }
+    </label>
+    <input type="number" formControlName="quantity" class="form-input" min="1" [max]="selectedShowtime()?.availableSeats || 1" />
+    @if (bookingForm.get('quantity')?.touched) {
+      @if (bookingForm.get('quantity')?.errors?.['min']) {
+        <span class="error-msg">Seleziona almeno 1 posto.</span>
+      } @else if (bookingForm.get('quantity')?.errors?.['max']) {
+        <span class="error-msg">Non sono disponibili più di {{ selectedShowtime()?.availableSeats }} posti.</span>
+      } @else if (bookingForm.get('quantity')?.errors?.['required']) {
+        <span class="error-msg">Inserisci il numero di posti.</span>
+      }
+    }
+  </div>
+
 </form>

@@ -54,11 +54,27 @@ export class Prenotazione implements OnInit {
     this.bookingForm = this.fb.group({
       showtimeId: ['', Validators.required],
       ticketType: ['intero', Validators.required],
+      quantity: [1, [Validators.required, Validators.min(1)]],
     });
   }
 
   private updateSelectedShowtime(id: number): void {
     const found = this.showtimes().find((s) => s.id === id) || null;
     this.selectedShowtime.set(found);
+
+    const quantityCtrl = this.bookingForm.get('quantity');
+    if (!quantityCtrl) return;
+
+    quantityCtrl.clearValidators();
+    if (found) {
+      quantityCtrl.setValidators([
+        Validators.required,
+        Validators.min(1),
+        Validators.max(found.availableSeats),
+      ]);
+    } else {
+      quantityCtrl.setValidators([Validators.required, Validators.min(1)]);
+    }
+    quantityCtrl.updateValueAndValidity();
   }
 }
