@@ -1,9 +1,9 @@
-import { Component, OnInit, inject, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
 import { CommonModule, CurrencyPipe } from '@angular/common';
 import { FormBuilder, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PrenotazioneService } from '../../services/prenotazione';
-import { Showtime } from '../../models/showtime';
+import { Showtime, Prenotazione as PrenotazioneModel } from '../../models/showtime';
 
 @Component({
   selector: 'app-prenotazione',
@@ -16,10 +16,22 @@ export class Prenotazione implements OnInit {
   private fb = inject(FormBuilder);
   private service = inject(PrenotazioneService);
   private route = inject(ActivatedRoute);
+  private router = inject(Router);
 
   bookingForm!: FormGroup;
   showtimes = signal<Showtime[]>([]);
   selectedShowtime = signal<Showtime | null>(null);
+
+  ticketTypeSignal = signal<'intero' | 'ridotto' | 'bambino'>('intero');
+  quantitySignal = signal<number>(1);
+
+  protected totalPrice = computed(() => {
+    const st = this.selectedShowtime();
+    if (!st) return 0;
+    const tt = this.ticketTypeSignal();
+    const qty = Number(this.quantitySignal() || 0);
+    return st.prices[tt] * qty;
+  });
 
   ticketOptions: { value: 'intero' | 'ridotto' | 'bambino'; label: string; desc: string }[] = [
     { value: 'intero', label: 'Intero', desc: 'Biglietto standard' },
@@ -29,6 +41,13 @@ export class Prenotazione implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
+    // initialize reactive signals from the form
+    this.ticketTypeSignal.set(this.bookingForm.get('ticketType')?.value ?? 'intero');
+    this.quantitySignal.set(Number(this.bookingForm.get('quantity')?.value) || 1);
+
+    // keep signals in sync with form controls so computed() updates
+    this.bookingForm.get('ticketType')?.valueChanges.subscribe((v) => this.ticketTypeSignal.set(v));
+    this.bookingForm.get('quantity')?.valueChanges.subscribe((v) => this.quantitySignal.set(Number(v)));
     const movieIdParam = this.route.snapshot.paramMap.get('movieId');
 
     const showtimes$ = movieIdParam
@@ -76,5 +95,35 @@ export class Prenotazione implements OnInit {
       quantityCtrl.setValidators([Validators.required, Validators.min(1)]);
     }
     quantityCtrl.updateValueAndValidity();
+  }
+
+  confirmBooking(): void {
+    if (this.bookingForm.invalid) return;
+
+    const showtime = this.selectedShowtime();
+    if (!showtime) return;
+
+    const formValue = this.bookingForm.value;
+    const ticketType = formValue.ticketType as 'intero' | 'ridotto' | 'bambino';
+    const quantity = Number(formValue.quantity);
+    const unitPrice = showtime.prices[ticketType];
+    const totalPrice = unitPrice * quantity;
+    const bookingCode = this.service.generateBookingCode();
+
+    const prenotazione: PrenotazioneModel = {
+      showtimeId: showtime.id,
+      movieTitle: showtime.title,
+      date: showtime.date,
+      time: showtime.time,
+      hall: showtime.hall,
+      ticketType,
+      quantity,
+      unitPrice,
+      totalPrice,
+      bookingCode,
+    };
+
+    this.service.setCurrentPrenotazione(prenotazione);
+    this.router.navigate(['/prenotazione/conferma']);
   }
 }

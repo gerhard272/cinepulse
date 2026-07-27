@@ -1,7 +1,8 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { TitleCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Movie } from '../../../models/models';
+import { WatchlistService } from '../../watchlist/watchlist.service';
 
 @Component({
   selector: 'app-movie-card',
@@ -11,12 +12,26 @@ import { Movie } from '../../../models/models';
   styleUrl: './movie-card.css',
 })
 export class MovieCard {
+  private readonly watchlistService = inject(WatchlistService);
+
   @Input({ required: true }) movie!: Movie;
-  @Input() isInWatchlist = false;
   @Output() addToWatchlist = new EventEmitter<string>();
+
+  get isInWatchlist(): boolean {
+    return this.watchlistService.isInWatchlist(this.movie.id);
+  }
 
   onAddToWatchlist(event: Event): void {
     event.stopPropagation();
-    this.addToWatchlist.emit(this.movie.id);
+
+    const movieId = this.movie.id;
+
+    if (!this.watchlistService.isInWatchlist(movieId)) {
+      this.watchlistService.addToWatchlist({ movieId, addedAt: new Date().toISOString() });
+    } else {
+      this.watchlistService.removeFromWatchlist(movieId);
+    }
+
+    this.addToWatchlist.emit(movieId);
   }
 }

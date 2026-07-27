@@ -18,10 +18,7 @@
     <h2>Al cinema ora</h2>
     <div class="section__grid">
       @for (movie of inCinema(); track movie.id) {
-        <app-movie-card
-          [movie]="movie"
-          (addToWatchlist)="onAddToWatchlist($event)"
-        ></app-movie-card>
+        <app-movie-card [movie]="movie"></app-movie-card>
       } @empty {
         <p class="section__placeholder">Nessun film al cinema al momento.</p>
       }
@@ -32,10 +29,7 @@
     <h2>In streaming</h2>
     <div class="section__grid">
       @for (movie of inStreaming(); track movie.id) {
-        <app-movie-card
-          [movie]="movie"
-          (addToWatchlist)="onAddToWatchlist($event)"
-        ></app-movie-card>
+        <app-movie-card [movie]="movie"></app-movie-card>
       } @empty {
         <p class="section__placeholder">Nessun contenuto in streaming al momento.</p>
       }

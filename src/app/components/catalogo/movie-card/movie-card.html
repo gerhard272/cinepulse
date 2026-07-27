@@ -22,14 +22,14 @@
     }
   </div>
   <div class="card-body">
-    <h3 class="title">{{ movie.title | titlecase }}</h3>
+    <h3 class="title">{{ movie.title }}</h3>
     <p class="meta">
       <span>{{ movie.releaseYear }}</span>
       <span class="separator">|</span>
       <span>{{ movie.genre }}</span>
     </p>
     <span class="availability-badge" [class]="movie.availability">
-      {{ movie.availability === 'both' ? 'Cinema & Streaming' : movie.availability | titlecase }}
+      {{ movie.availability === 'both' ? 'Cinema & Streaming' : movie.availability}}
     </span>
   </div>
 </div>
