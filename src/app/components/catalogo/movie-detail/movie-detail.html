@@ -1,1 +1,60 @@
-<p>movie-detail works!</p>
+<div class="movie-detail-container">
+  @if (movie()) {
+    <div class="back-link">
+      <a routerLink="/catalogo">← Torna al Catalogo</a>
+    </div>
+
+    <div class="detail-header">
+      <img [src]="movie()!.posterUrl || 'https://via.placeholder.com/500x750?text=No+Poster'" [alt]="movie()!.title" class="poster">
+      
+      <div class="info">
+        <h1 class="title">{{ movie()!.title | titlecase }}</h1>
+        
+        <div class="meta">
+          <span class="year">{{ toReleaseDate(movie()!.releaseYear) | date:'yyyy' }}</span>
+          <span class="genre">{{ movie()!.genre }}</span>
+          @if (movie()!.rating) {
+            <span class="rating">★ {{ movie()!.rating }}</span>
+          }
+        </div>
+        
+        <div class="availability-badge" [class]="movie()!.availability">
+          {{ movie()!.availability === 'both' ? 'Cinema & Streaming' : movie()!.availability | titlecase }}
+        </div>
+
+        <p class="synopsis">{{ movie()!.synopsis }}</p>
+
+        @if (movie()!.cast && movie()!.cast!.length > 0) {
+          <div class="cast-section">
+            <h3>Cast</h3>
+            <ul>
+              @for (actor of movie()!.cast; track actor) {
+                <li>{{ actor }}</li>
+              }
+            </ul>
+          </div>
+        }
+      </div>
+    </div>
+
+    @if (trailerUrl()) {
+      <div class="trailer-section">
+        <h2>Trailer</h2>
+        <div class="video-container">
+          <iframe 
+            [src]="trailerUrl()" 
+            title="YouTube video player" 
+            frameborder="0" 
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+            referrerpolicy="strict-origin-when-cross-origin" 
+            allowfullscreen>
+          </iframe>
+        </div>
+      </div>
+    }
+  } @else {
+    <div class="loading">
+      Caricamento in corso...
+    </div>
+  }
+</div>
