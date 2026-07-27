@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { prenotazioneGuard } from './guards/prenotazione-guard';
 
 export const routes: Routes = [
   {
@@ -18,6 +19,7 @@ export const routes: Routes = [
     path: 'movies/:id/prenota',
     loadComponent: () =>
       import('./components/prenotazione/prenotazione').then((m) => m.Prenotazione),
+    canActivate: [prenotazioneGuard],
   },
   {
     path: 'prenotazione/conferma',
@@ -27,22 +29,6 @@ export const routes: Routes = [
   {
     path: 'watchlist',
     loadComponent: () => import('./components/watchlist/watchlist').then((m) => m.Watchlist),
-    children: [
-      {
-        path: 'film',
-        loadComponent: () =>
-          import('./components/watchlist/watchlist-film/watchlist-film').then(
-            (m) => m.WatchlistFilm,
-          ),
-      },
-      {
-        path: 'serie',
-        loadComponent: () =>
-          import('./components/watchlist/watchlist-serie/watchlist-serie').then(
-            (m) => m.WatchlistSerie,
-          ),
-      },
-    ],
   },
   {
     path: 'segnala',
