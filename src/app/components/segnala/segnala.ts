@@ -1,4 +1,5 @@
 // SCRUM-19
+// SCRUM-20 segnalazione
 import { Component, inject } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators, FormGroup } from '@angular/forms';
 
