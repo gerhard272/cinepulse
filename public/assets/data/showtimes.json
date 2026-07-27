@@ -1,0 +1,88 @@
+[{
+        "id": 101,
+        "movieId": 1,
+        "title": "Dune: Parte Due",
+        "date": "2026-07-28",
+        "time": "18:00",
+        "hall": "Sala 1 - IMAX",
+        "availableSeats": 120,
+        "prices": {
+            "intero": 8.0,
+            "ridotto": 6.0,
+            "bambino": 4.0
+        },
+        "specialNote": "Proiezione speciale in IMAX 70mm"
+    },
+    {
+        "id": 102,
+        "movieId": 1,
+        "title": "Dune: Parte Due",
+        "date": "2026-07-28",
+        "time": "21:15",
+        "hall": "Sala 1 - IMAX",
+        "availableSeats": 85,
+        "prices": {
+            "intero": 8.0,
+            "ridotto": 6.0,
+            "bambino": 4.0
+        }
+    },
+    {
+        "id": 103,
+        "movieId": 2,
+        "title": "Oppenheimer",
+        "date": "2026-07-28",
+        "time": "17:30",
+        "hall": "Sala 3",
+        "availableSeats": 60,
+        "prices": {
+            "intero": 8.0,
+            "ridotto": 6.0,
+            "bambino": 4.0
+        },
+        "specialNote": "Audio Dolby Atmos"
+    },
+    {
+        "id": 104,
+        "movieId": 2,
+        "title": "Oppenheimer",
+        "date": "2026-07-29",
+        "time": "20:45",
+        "hall": "Sala 3",
+        "availableSeats": 110,
+        "prices": {
+            "intero": 8.0,
+            "ridotto": 6.0,
+            "bambino": 4.0
+        }
+    },
+    {
+        "id": 105,
+        "movieId": 3,
+        "title": "Inside Out 2",
+        "date": "2026-07-28",
+        "time": "16:00",
+        "hall": "Sala 2",
+        "availableSeats": 140,
+        "prices": {
+            "intero": 7.0,
+            "ridotto": 5.0,
+            "bambino": 3.5
+        },
+        "specialNote": "Consigliato per famiglie"
+    },
+    {
+        "id": 106,
+        "movieId": 3,
+        "title": "Inside Out 2",
+        "date": "2026-07-28",
+        "time": "18:30",
+        "hall": "Sala 2",
+        "availableSeats": 95,
+        "prices": {
+            "intero": 7.0,
+            "ridotto": 5.0,
+            "bambino": 3.5
+        }
+    }
+]
