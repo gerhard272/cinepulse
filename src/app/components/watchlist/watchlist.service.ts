@@ -14,6 +14,10 @@ export class WatchlistService {
   // Computed per verificare se la watchlist è vuota
   public readonly isWatchlistEmpty = computed(() => this.watchlistSignal().length === 0);
 
+  isInWatchlist(movieId: string): boolean {
+    return this.watchlistSignal().some(item => item.movieId === movieId);
+  }
+
   constructor() {}
 
   // Metodi per aggiornare lo stato

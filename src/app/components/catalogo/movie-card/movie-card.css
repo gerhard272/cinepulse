@@ -67,6 +67,11 @@
   transform: scale(1.1);
 }
 
+.watchlist-btn.active {
+  background: #e50914;
+  border-color: #e50914;
+}
+
 .rating-badge {
   position: absolute;
   top: 8px;

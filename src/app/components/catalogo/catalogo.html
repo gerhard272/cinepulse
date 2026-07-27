@@ -57,6 +57,7 @@
         @for (movie of filteredMovies(); track movie.id) {
           <app-movie-card
             [movie]="movie"
+            [isInWatchlist]="watchlistService.isInWatchlist(movie.id)"
             (addToWatchlist)="onAddToWatchlist($event)">
           </app-movie-card>
         }
