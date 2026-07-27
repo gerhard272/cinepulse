@@ -9,6 +9,7 @@ import { Showtime, Prenotazione } from '../models/showtime';
 export class PrenotazioneService {
   private http = inject(HttpClient);
   private jsonUrl = 'assets/data/showtimes.json';
+  private currentPrenotazione: Prenotazione | null = null;
 
   private fallbackShowtimes: Showtime[] = [
     {
@@ -88,6 +89,18 @@ export class PrenotazioneService {
     return this.getShowtimes().pipe(
       map(showtimes => showtimes.find(s => s.id === Number(id)))
     );
+  }
+
+  setCurrentPrenotazione(prenotazione: Prenotazione): void {
+    this.currentPrenotazione = prenotazione;
+  }
+
+  getCurrentPrenotazione(): Prenotazione | null {
+    return this.currentPrenotazione;
+  }
+
+  clearCurrentPrenotazione(): void {
+    this.currentPrenotazione = null;
   }
 
   generateBookingCode(): string {

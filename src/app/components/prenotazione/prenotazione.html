@@ -1,7 +1,16 @@
-<form [formGroup]="bookingForm">
+<section class="booking-page">
+  <div class="booking-card">
+    <div class="booking-header">
+      <div class="header-titles">
+        <h1>Prenota i tuoi posti</h1>
+        <p class="movie-name">Conferma i dettagli e procedi al pagamento</p>
+      </div>
+    </div>
 
-  <!-- Selezione Data & Ora -->
-  <div class="form-group">
+    <form [formGroup]="bookingForm" (ngSubmit)="confirmBooking()" class="booking-form">
+
+      <!-- Selezione Data & Ora -->
+      <div class="form-group">
     <label for="showtimeSelect" class="form-label">Data e Orario Spettacolo</label>
     <select id="showtimeSelect" formControlName="showtimeId" class="form-select">
       <option value="" disabled>-- Seleziona orario --</option>
@@ -58,4 +67,15 @@
     }
   </div>
 
-</form>
+      <!-- Riepilogo e Conferma -->
+      <div class="summary-footer">
+        <div class="price-container">
+          <span class="price-label">Totale</span>
+          <span class="price-amount">{{ totalPrice() | currency:'EUR' }}</span>
+        </div>
+        <button type="submit" class="btn-submit" [disabled]="bookingForm.invalid">Conferma Prenotazione</button>
+      </div>
+
+    </form>
+  </div>
+</section>
