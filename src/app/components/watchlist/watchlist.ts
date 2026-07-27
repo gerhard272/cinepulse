@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { WatchlistService } from './watchlist.service';
 
 @Component({
   selector: 'app-watchlist',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   templateUrl: './watchlist.html',
   styleUrl: './watchlist.css',
 })
-export class Watchlist {}
+export class Watchlist {
+  public watchlistService = inject(WatchlistService);
+}
