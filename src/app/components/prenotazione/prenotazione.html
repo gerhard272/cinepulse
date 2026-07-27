@@ -27,7 +27,7 @@
             <span class="ticket-title">{{ option.label }}</span>
             <span class="ticket-price">
               @if (selectedShowtime(); as st) {
-                {{ st.prices[option.value] | currency:'EUR':'it-IT' }}
+                {{ st.prices[option.value] | currency:'EUR' }}
               } @else {
                 --
               }
