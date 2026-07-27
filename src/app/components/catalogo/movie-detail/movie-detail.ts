@@ -2,8 +2,7 @@ import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-movie-detail',
-  imports: [],
-  templateUrl: './movie-detail.html',
-  styleUrl: './movie-detail.css',
+  standalone: true,
+  template: `<p>movie-detail works!</p>`,
 })
 export class MovieDetail {}

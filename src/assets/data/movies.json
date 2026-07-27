@@ -1,0 +1,62 @@
+[
+  {
+    "id": "1",
+    "title": "the matrix",
+    "genre": "Fantascienza",
+    "releaseYear": 1999,
+    "availability": "streaming",
+    "synopsis": "Un programmatore di computer scopre un segreto sulla realtà e si unisce a un gruppo di ribelli.",
+    "cast": ["Keanu Reeves", "Laurence Fishburne", "Carrie-Anne Moss"],
+    "trailerUrl": "https://www.youtube.com/embed/vKQi3bBA1y8",
+    "rating": 8.7,
+    "posterUrl": "https://media.posterstore.com/site_images/68631cdc603ad773cc39b773_1771731552_WB0071-8.jpg"
+  },
+  {
+    "id": "2",
+    "title": "INCEPTION",
+    "genre": "Azione",
+    "releaseYear": 2010,
+    "availability": "both",
+    "synopsis": "Un ladro esperto nel rubare segreti dal subconscio durante lo stato di sogno si vede offrire la possibilità di cancellare i suoi crimini.",
+    "cast": ["Leonardo DiCaprio", "Joseph Gordon-Levitt", "Elliot Page"],
+    "trailerUrl": "https://www.youtube.com/embed/YoHD9XEInc0",
+    "rating": 8.8,
+    "posterUrl": "https://m.media-amazon.com/images/M/MV5BMjAxMzY3NjcxNF5BMl5BanBnXkFtZTcwNTI5OTM0Mw@@._V1_FMjpg_UX1000_.jpg"
+  },
+  {
+    "id": "3",
+    "title": "dune: parte due",
+    "genre": "Fantascienza",
+    "releaseYear": 2024,
+    "availability": "cinema",
+    "synopsis": "Paul Atreides si unisce a Chani e ai Fremen mentre è sul sentiero di guerra per vendicarsi dei cospiratori che hanno distrutto la sua famiglia.",
+    "cast": ["Timothée Chalamet", "Zendaya", "Rebecca Ferguson"],
+    "trailerUrl": "https://www.youtube.com/embed/Way9Dexny3w",
+    "rating": 8.6,
+    "posterUrl": "https://m.media-amazon.com/images/M/MV5BNTc0YmQxMjEtODI5MC00NjFiLTlkMWUtOGQ5NjFmYWUyZGJhXkEyXkFqcGc@._V1_.jpg"
+  },
+  {
+    "id": "4",
+    "title": "il gladiatore",
+    "genre": "Storico",
+    "releaseYear": 2000,
+    "availability": "streaming",
+    "synopsis": "Un ex generale romano in cerca di vendetta contro l'imperatore corrotto che ha assassinato la sua famiglia e lo ha inviato in schiavitù.",
+    "cast": ["Russell Crowe", "Joaquin Phoenix", "Connie Nielsen"],
+    "trailerUrl": "https://www.youtube.com/embed/owK1qxDselE",
+    "rating": 8.5,
+    "posterUrl": "https://m.media-amazon.com/images/I/81ynV-Akv-L.jpg"
+  },
+  {
+    "id": "5",
+    "title": "avatar",
+    "genre": "Fantascienza",
+    "releaseYear": 2009,
+    "availability": "both",
+    "synopsis": "Un marine paraplegico inviato sulla luna Pandora per una missione unica è diviso tra seguire i suoi ordini o proteggere il mondo che sente essere la sua casa.",
+    "cast": ["Sam Worthington", "Zoe Saldana", "Sigourney Weaver"],
+    "trailerUrl": "https://www.youtube.com/embed/5PSNL1qE6VY",
+    "rating": 7.9,
+    "posterUrl": "https://image.tmdb.org/t/p/w500/jRXYjXNq0Cs2TcJjLkki24MLp7u.jpg"
+  }
+]

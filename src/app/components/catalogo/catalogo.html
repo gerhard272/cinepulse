@@ -1,1 +1,24 @@
-<p>catalogo works!</p>
+<div class="catalogo-container">
+  <h1>Catalogo Film</h1>
+
+  @if (loading()) {
+    <div class="loading-state">
+      Caricamento film in corso...
+    </div>
+  } @else {
+    @if (movies().length > 0) {
+      <div class="movies-grid">
+        @for (movie of movies(); track movie.id) {
+          <app-movie-card
+            [movie]="movie"
+            (addToWatchlist)="onAddToWatchlist($event)">
+          </app-movie-card>
+        }
+      </div>
+    } @else {
+      <div class="empty-state">
+        Nessun film disponibile.
+      </div>
+    }
+  }
+</div>
