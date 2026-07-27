@@ -1,0 +1,108 @@
+<div class="segnala-container">
+  <h2>Segnala un problema</h2>
+
+  @if (formInviato) {
+    <div class="success-message">
+      <p>Grazie! La tua segnalazione è stata inviata con successo.</p>
+    </div>
+  } @else {
+    <form [formGroup]="segnalaForm" (ngSubmit)="onSubmit()">
+      
+      <!-- Nome -->
+      <div class="form-group">
+        <label for="nome">Nome</label>
+        <input id="nome" type="text" formControlName="nome" placeholder="Il tuo nome" />
+        
+        @if (segnalaForm.get('nome')?.invalid && segnalaForm.get('nome')?.touched) {
+          <div class="error-message">
+            @if (segnalaForm.get('nome')?.hasError('required')) {
+              <span>Il nome è obbligatorio.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Email -->
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input id="email" type="email" formControlName="email" placeholder="La tua email" />
+        
+        @if (segnalaForm.get('email')?.invalid && segnalaForm.get('email')?.touched) {
+          <div class="error-message">
+            @if (segnalaForm.get('email')?.hasError('required')) {
+              <span>L'email è obbligatoria.</span>
+            }
+            @if (segnalaForm.get('email')?.hasError('email')) {
+              <span>Inserisci un indirizzo email valido.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Select Film -->
+      <div class="form-group">
+        <label for="movieId">Relativo al film</label>
+        <select id="movieId" formControlName="movieId">
+          <option value="" disabled selected>Seleziona un film</option>
+          <option value="film-1">Il Padrino</option>
+          <option value="film-2">Pulp Fiction</option>
+          <option value="film-3">Inception</option>
+        </select>
+
+        @if (segnalaForm.get('movieId')?.invalid && segnalaForm.get('movieId')?.touched) {
+          <div class="error-message">
+            @if (segnalaForm.get('movieId')?.hasError('required')) {
+              <span>Seleziona un film di riferimento.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Radio Tipo -->
+      <div class="form-group">
+        <label>Tipo di problema</label>
+        <div class="radio-group">
+          <div>
+            <input type="radio" id="tipo-dati" formControlName="tipo" value="dati" />
+            <label for="tipo-dati">Dati errati</label>
+          </div>
+          <div>
+            <input type="radio" id="tipo-prenotazione" formControlName="tipo" value="prenotazione" />
+            <label for="tipo-prenotazione">Problema con la prenotazione</label>
+          </div>
+          <div>
+            <input type="radio" id="tipo-bug" formControlName="tipo" value="bug" />
+            <label for="tipo-bug">Bug tecnico</label>
+          </div>
+        </div>
+
+        @if (segnalaForm.get('tipo')?.invalid && segnalaForm.get('tipo')?.touched) {
+          <div class="error-message">
+            @if (segnalaForm.get('tipo')?.hasError('required')) {
+              <span>Seleziona un tipo di problema.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <!-- Textarea Descrizione -->
+      <div class="form-group">
+        <label for="descrizione">Descrizione del problema</label>
+        <textarea id="descrizione" formControlName="descrizione" rows="5" placeholder="Descrivi il problema riscontrato (min 10 caratteri)"></textarea>
+
+        @if (segnalaForm.get('descrizione')?.invalid && segnalaForm.get('descrizione')?.touched) {
+          <div class="error-message">
+            @if (segnalaForm.get('descrizione')?.hasError('required')) {
+              <span>La descrizione è obbligatoria.</span>
+            }
+            @if (segnalaForm.get('descrizione')?.hasError('minlength')) {
+              <span>La descrizione deve essere di almeno 10 caratteri.</span>
+            }
+          </div>
+        }
+      </div>
+
+      <button type="submit" [disabled]="segnalaForm.invalid">Invia Segnalazione</button>
+    </form>
+  }
+</div>
