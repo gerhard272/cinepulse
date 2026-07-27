@@ -1,26 +1,34 @@
 <div class="movie-card" [routerLink]="['/movies', movie.id]">
-  <div class="poster-container">
-    <div class="poster-clip">
-      <img [src]="movie.posterUrl || 'https://via.placeholder.com/500x750?text=No+Poster'" [alt]="movie.title" class="poster">
-      @if (movie.rating) {
-        <div class="rating-badge">
-          <i class="star-icon">★</i> {{ movie.rating }}
-        </div>
-      }
+  <div class="poster-wrapper">
+    <img
+      [src]="movie.posterUrl || 'https://via.placeholder.com/500x750?text=No+Poster'"
+      [alt]="movie.title"
+      class="poster"
+    />
+    <div class="card-overlay">
+      <button
+        class="watchlist-btn"
+        (click)="onAddToWatchlist($event)"
+        title="Aggiungi alla Watchlist"
+      >
+        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
+        </svg>
+      </button>
     </div>
-    <button class="watchlist-btn" (click)="onAddWatchlist($event)" title="Aggiungi alla Watchlist">
-      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path><line x1="12" y1="7" x2="12" y2="13"></line><line x1="9" y1="10" x2="15" y2="10"></line></svg>
-    </button>
+    @if (movie.rating) {
+      <span class="rating-badge">{{ movie.rating }}</span>
+    }
   </div>
-  <div class="movie-info">
+  <div class="card-body">
     <h3 class="title">{{ movie.title | titlecase }}</h3>
-    <div class="meta">
-      <span class="year">{{ toReleaseDate(movie.releaseYear) | date:'yyyy' }}</span>
-      <span class="dot">•</span>
-      <span class="genre">{{ movie.genre }}</span>
-    </div>
-    <div class="availability-badge" [class]="movie.availability">
+    <p class="meta">
+      <span>{{ movie.releaseYear }}</span>
+      <span class="separator">|</span>
+      <span>{{ movie.genre }}</span>
+    </p>
+    <span class="availability-badge" [class]="movie.availability">
       {{ movie.availability === 'both' ? 'Cinema & Streaming' : movie.availability | titlecase }}
-    </div>
+    </span>
   </div>
 </div>

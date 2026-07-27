@@ -1,12 +1,12 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Movie } from '../../../models/models';
-import { TitleCasePipe, DatePipe } from '@angular/common';
+import { TitleCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { Movie } from '../../../models/models';
 
 @Component({
   selector: 'app-movie-card',
   standalone: true,
-  imports: [TitleCasePipe, DatePipe, RouterLink],
+  imports: [TitleCasePipe, RouterLink],
   templateUrl: './movie-card.html',
   styleUrl: './movie-card.css',
 })
@@ -14,13 +14,8 @@ export class MovieCard {
   @Input({ required: true }) movie!: Movie;
   @Output() addToWatchlist = new EventEmitter<string>();
 
-  toReleaseDate(year: number): Date {
-    return new Date(year, 0, 1);
-  }
-
-  onAddWatchlist(event: Event) {
+  onAddToWatchlist(event: Event): void {
     event.stopPropagation();
-    event.preventDefault();
     this.addToWatchlist.emit(this.movie.id);
   }
 }

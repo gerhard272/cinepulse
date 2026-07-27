@@ -1,34 +1,23 @@
 <div class="catalogo-container">
-  <div class="header-section">
-    <h1>Catalogo Film</h1>
-    <div class="search-bar">
-      <input 
-        type="text" 
-        [formControl]="searchControl" 
-        placeholder="Cerca per titolo, genere, anno o disponibilità..."
-        class="search-input"
-      >
-      <svg class="search-icon" xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-    </div>
-  </div>
+  <h1>Catalogo Film</h1>
 
   @if (loading()) {
     <div class="loading-state">
       Caricamento film in corso...
     </div>
   } @else {
-    @if (filteredMovies().length > 0) {
+    @if (movies().length > 0) {
       <div class="movies-grid">
-        @for (movie of filteredMovies(); track movie.id) {
-          <app-movie-card 
-            [movie]="movie" 
+        @for (movie of movies(); track movie.id) {
+          <app-movie-card
+            [movie]="movie"
             (addToWatchlist)="onAddToWatchlist($event)">
           </app-movie-card>
         }
       </div>
     } @else {
       <div class="empty-state">
-        Nessun film trovato per i criteri di ricerca inseriti.
+        Nessun film disponibile.
       </div>
     }
   }
