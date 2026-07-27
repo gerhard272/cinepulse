@@ -38,9 +38,4 @@ export class Home {
   constructor() {
     this.movieService.getMovies();
   }
-
-  onAddToWatchlist(movieId: string): void {
-    // collegamento a WatchlistService (Membro 4)
-    console.log('Aggiunto a watchlist:', movieId);
-  }
 }

@@ -3,9 +3,8 @@ import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs/operators';
 import { MovieService } from '../../services/movie';
-import { WatchlistService } from '../watchlist/watchlist.service';
 import { MovieCard } from './movie-card/movie-card';
-import { Movie, WatchlistItem } from '../../models/models';
+import { Movie } from '../../models/models';
 
 @Component({
   selector: 'app-catalogo',
@@ -16,7 +15,6 @@ import { Movie, WatchlistItem } from '../../models/models';
 })
 export class Catalogo implements OnInit {
   private readonly movieService = inject(MovieService);
-  readonly watchlistService = inject(WatchlistService);
   private readonly destroyRef = inject(DestroyRef);
 
   filterForm = new FormGroup({
@@ -60,15 +58,6 @@ export class Catalogo implements OnInit {
     ).subscribe(values => {
       this.applyFilters(values);
     });
-  }
-
-  onAddToWatchlist(movieId: string): void {
-    if (!this.watchlistService.isInWatchlist(movieId)) {
-      const item: WatchlistItem = { movieId, addedAt: new Date().toISOString() };
-      this.watchlistService.addToWatchlist(item);
-    } else {
-      this.watchlistService.removeFromWatchlist(movieId);
-    }
   }
 
   private applyFilters(values: Partial<{ title: string | null; genre: string | null; releaseYear: string | null; availability: string | null }>): void {
