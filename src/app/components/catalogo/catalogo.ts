@@ -62,15 +62,6 @@ export class Catalogo implements OnInit {
     });
   }
 
-  onAddToWatchlist(movieId: string): void {
-    if (!this.watchlistService.isInWatchlist(movieId)) {
-      const item: WatchlistItem = { movieId, addedAt: new Date().toISOString() };
-      this.watchlistService.addToWatchlist(item);
-    } else {
-      this.watchlistService.removeFromWatchlist(movieId);
-    }
-  }
-
   private applyFilters(values: Partial<{ title: string | null; genre: string | null; releaseYear: string | null; availability: string | null }>): void {
     const allMovies = this.movieService.movies();
     let result = [...allMovies];
