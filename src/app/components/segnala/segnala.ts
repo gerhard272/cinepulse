@@ -1,3 +1,4 @@
+// SCRUM-20 segnalazione
 import { Component } from '@angular/core';
 
 @Component({
