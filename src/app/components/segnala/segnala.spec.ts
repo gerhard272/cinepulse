@@ -1,4 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 
 import { Segnala } from './segnala';
 
@@ -8,7 +9,7 @@ describe('Segnala', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      imports: [Segnala],
+      imports: [Segnala, HttpClientTestingModule],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Segnala);
@@ -18,5 +19,9 @@ describe('Segnala', () => {
 
   it('should create', () => {
     expect(component).toBeTruthy();
+  });
+
+  it('should load movie options from mock data', () => {
+    expect(component.movieOptions().length).toBeGreaterThan(0);
   });
 });
