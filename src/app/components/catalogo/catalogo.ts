@@ -1,11 +1,11 @@
 import { Component, OnInit, inject, signal, effect, DestroyRef } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs/operators';
 import { MovieService } from '../../services/movie';
 import { WatchlistService } from '../watchlist/watchlist.service';
 import { MovieCard } from './movie-card/movie-card';
-import { Movie, WatchlistItem } from '../../models/models';
+import { Movie } from '../../models/models';
 
 @Component({
   selector: 'app-catalogo',
@@ -18,12 +18,13 @@ export class Catalogo implements OnInit {
   private readonly movieService = inject(MovieService);
   readonly watchlistService = inject(WatchlistService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly fb = inject(FormBuilder);
 
-  filterForm = new FormGroup({
-    title: new FormControl(''),
-    genre: new FormControl(''),
-    releaseYear: new FormControl(''),
-    availability: new FormControl(''),
+  filterForm = this.fb.group({
+    title: [''],
+    genre: [''],
+    releaseYear: [''],
+    availability: [''],
   });
 
   filteredMovies = signal<Movie[]>([]);
