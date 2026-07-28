@@ -21,7 +21,7 @@ describe('Watchlist', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should initialize with mock watchlist items', () => {
-    expect(component.watchlistService.watchlist().length).toBeGreaterThan(0);
+  it('should initialize with an empty watchlist', () => {
+    expect(component.watchlistService.watchlist().length).toBe(0);
   });
 });
