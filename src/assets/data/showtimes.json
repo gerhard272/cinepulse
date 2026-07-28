@@ -1,0 +1,331 @@
+[
+  {
+    "id": 101,
+    "movieId": "1",
+    "title": "The Matrix",
+    "date": "2026-07-28",
+    "time": "18:00",
+    "hall": "Sala 1 - IMAX",
+    "availableSeats": 120,
+    "prices": {
+      "intero": 8.0,
+      "ridotto": 6.0,
+      "bambino": 4.0
+    },
+    "specialNote": "Proiezione speciale in IMAX 70mm"
+  },
+  {
+    "id": 102,
+    "movieId": "1",
+    "title": "The Matrix",
+    "date": "2026-07-28",
+    "time": "21:15",
+    "hall": "Sala 1 - IMAX",
+    "availableSeats": 85,
+    "prices": {
+      "intero": 8.0,
+      "ridotto": 6.0,
+      "bambino": 4.0
+    }
+  },
+  {
+    "id": 103,
+    "movieId": "2",
+    "title": "Inception",
+    "date": "2026-07-28",
+    "time": "17:30",
+    "hall": "Sala 3",
+    "availableSeats": 60,
+    "prices": {
+      "intero": 8.0,
+      "ridotto": 6.0,
+      "bambino": 4.0
+    },
+    "specialNote": "Audio Dolby Atmos"
+  },
+  {
+    "id": 104,
+    "movieId": "2",
+    "title": "Inception",
+    "date": "2026-07-29",
+    "time": "20:45",
+    "hall": "Sala 3",
+    "availableSeats": 110,
+    "prices": {
+      "intero": 8.0,
+      "ridotto": 6.0,
+      "bambino": 4.0
+    }
+  },
+  {
+    "id": 105,
+    "movieId": "3",
+    "title": "Dune: Parte Due",
+    "date": "2026-07-28",
+    "time": "16:00",
+    "hall": "Sala 2",
+    "availableSeats": 140,
+    "prices": {
+      "intero": 7.0,
+      "ridotto": 5.0,
+      "bambino": 3.5
+    },
+    "specialNote": "Consigliato per famiglie"
+  },
+  {
+    "id": 106,
+    "movieId": "3",
+    "title": "Dune: Parte Due",
+    "date": "2026-07-28",
+    "time": "18:30",
+    "hall": "Sala 2",
+    "availableSeats": 95,
+    "prices": {
+      "intero": 7.0,
+      "ridotto": 5.0,
+      "bambino": 3.5
+    }
+  },
+  {
+    "id": 107,
+    "movieId": "4",
+    "title": "Il Gladiatore",
+    "date": "2026-07-29",
+    "time": "19:00",
+    "hall": "Sala 4",
+    "availableSeats": 80,
+    "prices": {
+      "intero": 7.5,
+      "ridotto": 5.5,
+      "bambino": 3.5
+    },
+    "specialNote": "Proiezione restaurata"
+  },
+  {
+    "id": 108,
+    "movieId": "5",
+    "title": "Avatar",
+    "date": "2026-07-28",
+    "time": "20:00",
+    "hall": "Sala 5",
+    "availableSeats": 70,
+    "prices": {
+      "intero": 8.0,
+      "ridotto": 6.0,
+      "bambino": 4.0
+    }
+  },
+  {
+    "id": 109,
+    "movieId": "6",
+    "title": "Interstellar",
+    "date": "2026-07-30",
+    "time": "21:00",
+    "hall": "Sala 1 - IMAX",
+    "availableSeats": 90,
+    "prices": {
+      "intero": 8.5,
+      "ridotto": 6.5,
+      "bambino": 4.5
+    },
+    "specialNote": "Evento speciale"
+  },
+  {
+    "id": 110,
+    "movieId": "7",
+    "title": "Parasite",
+    "date": "2026-07-29",
+    "time": "22:00",
+    "hall": "Sala 6",
+    "availableSeats": 65,
+    "prices": {
+      "intero": 7.0,
+      "ridotto": 5.0,
+      "bambino": 3.0
+    }
+  },
+  {
+    "id": 111,
+    "movieId": "8",
+    "title": "La La Land",
+    "date": "2026-07-31",
+    "time": "19:30",
+    "hall": "Sala 2",
+    "availableSeats": 75,
+    "prices": {
+      "intero": 6.5,
+      "ridotto": 4.5,
+      "bambino": 3.0
+    }
+  },
+  {
+    "id": 112,
+    "movieId": "9",
+    "title": "Spider-Man: Into the Spider-Verse",
+    "date": "2026-07-28",
+    "time": "15:30",
+    "hall": "Sala 7",
+    "availableSeats": 100,
+    "prices": {
+      "intero": 6.0,
+      "ridotto": 4.0,
+      "bambino": 2.5
+    },
+    "specialNote": "Versione doppiata"
+  },
+  {
+    "id": 113,
+    "movieId": "10",
+    "title": "Whiplash",
+    "date": "2026-07-30",
+    "time": "18:45",
+    "hall": "Sala 4",
+    "availableSeats": 55,
+    "prices": {
+      "intero": 7.0,
+      "ridotto": 5.0,
+      "bambino": 3.0
+    }
+  },
+  {
+    "id": 114,
+    "movieId": "11",
+    "title": "Mad Max: Fury Road",
+    "date": "2026-07-29",
+    "time": "21:30",
+    "hall": "Sala 5",
+    "availableSeats": 88,
+    "prices": {
+      "intero": 8.0,
+      "ridotto": 6.0,
+      "bambino": 4.0
+    }
+  },
+  {
+    "id": 115,
+    "movieId": "12",
+    "title": "The Grand Budapest Hotel",
+    "date": "2026-07-31",
+    "time": "17:00",
+    "hall": "Sala 6",
+    "availableSeats": 60,
+    "prices": {
+      "intero": 6.5,
+      "ridotto": 4.5,
+      "bambino": 3.0
+    }
+  },
+  {
+    "id": 116,
+    "movieId": "13",
+    "title": "Get Out",
+    "date": "2026-07-28",
+    "time": "23:00",
+    "hall": "Sala 3",
+    "availableSeats": 45,
+    "prices": {
+      "intero": 7.5,
+      "ridotto": 5.5,
+      "bambino": 3.5
+    }
+  },
+  {
+    "id": 117,
+    "movieId": "14",
+    "title": "Arrival",
+    "date": "2026-07-30",
+    "time": "20:30",
+    "hall": "Sala 7",
+    "availableSeats": 72,
+    "prices": {
+      "intero": 7.0,
+      "ridotto": 5.0,
+      "bambino": 3.0
+    }
+  },
+  {
+    "id": 118,
+    "movieId": "15",
+    "title": "The Social Network",
+    "date": "2026-07-29",
+    "time": "18:30",
+    "hall": "Sala 4",
+    "availableSeats": 68,
+    "prices": {
+      "intero": 6.5,
+      "ridotto": 4.5,
+      "bambino": 3.0
+    }
+  },
+  {
+    "id": 119,
+    "movieId": "16",
+    "title": "Pulp Fiction",
+    "date": "2026-07-31",
+    "time": "22:30",
+    "hall": "Sala 1 - IMAX",
+    "availableSeats": 82,
+    "prices": {
+      "intero": 8.5,
+      "ridotto": 6.5,
+      "bambino": 4.5
+    }
+  },
+  {
+    "id": 120,
+    "movieId": "17",
+    "title": "The Revenant",
+    "date": "2026-07-28",
+    "time": "19:15",
+    "hall": "Sala 6",
+    "availableSeats": 58,
+    "prices": {
+      "intero": 7.0,
+      "ridotto": 5.0,
+      "bambino": 3.0
+    }
+  },
+  {
+    "id": 121,
+    "movieId": "18",
+    "title": "Coco",
+    "date": "2026-07-29",
+    "time": "16:30",
+    "hall": "Sala 7",
+    "availableSeats": 95,
+    "prices": {
+      "intero": 6.0,
+      "ridotto": 4.0,
+      "bambino": 2.5
+    },
+    "specialNote": "Film per famiglie"
+  },
+  {
+    "id": 122,
+    "movieId": "19",
+    "title": "Joker",
+    "date": "2026-07-30",
+    "time": "22:15",
+    "hall": "Sala 3",
+    "availableSeats": 62,
+    "prices": {
+      "intero": 7.5,
+      "ridotto": 5.5,
+      "bambino": 3.5
+    }
+  },
+  {
+    "id": 123,
+    "movieId": "20",
+    "title": "Shutter Island",
+    "date": "2026-07-31",
+    "time": "21:45",
+    "hall": "Sala 5",
+    "availableSeats": 66,
+    "prices": {
+      "intero": 7.0,
+      "ridotto": 5.0,
+      "bambino": 3.0
+    }
+  }
+]

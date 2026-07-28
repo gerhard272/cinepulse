@@ -1,0 +1,25 @@
+<div class="watchlist-container">
+  <h2>La mia Watchlist</h2>
+
+  @if (watchlistService.isWatchlistEmpty()) {
+    <div class="empty-watchlist">
+      <p>La tua watchlist è vuota. Aggiungi qualche contenuto per ritrovarlo qui!</p>
+    </div>
+  } @else {
+    <div class="watchlist-grid">
+      @for (item of watchlistMovies; track item.movieId) {
+        <div class="watchlist-card">
+          <app-movie-card
+            [movie]="item.movie!"
+            [showWatchlistButton]="false"
+            (addToWatchlist)="onRemoveFromWatchlist($event)"
+          ></app-movie-card>
+          <div class="watchlist-meta">
+            <span>Aggiunto il: {{ item.addedAt | date: 'dd/MM/yyyy' }}</span>
+            <button type="button" (click)="onRemoveFromWatchlist(item.movieId)">Rimuovi</button>
+          </div>
+        </div>
+      }
+    </div>
+  }
+</div>

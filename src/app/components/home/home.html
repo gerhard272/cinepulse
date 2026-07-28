@@ -1,0 +1,38 @@
+@if (loading()) {
+  <p class="section__placeholder">Caricamento film in corso...</p>
+} @else {
+  @if (featured(); as movie) {
+    <section class="hero">
+      <div class="hero__content">
+        <span class="hero__eyebrow">{{ movie.genre }}</span>
+        <h1>{{ movie.title }}</h1>
+        @if (movie.synopsis) {
+          <p>{{ movie.synopsis }}</p>
+        }
+        <a [routerLink]="['/movies', movie.id]" class="hero__cta">Scopri di più</a>
+      </div>
+    </section>
+  }
+
+  <section class="section">
+    <h2>Al cinema ora</h2>
+    <div class="section__grid">
+      @for (movie of inCinema(); track movie.id) {
+        <app-movie-card [movie]="movie"></app-movie-card>
+      } @empty {
+        <p class="section__placeholder">Nessun film al cinema al momento.</p>
+      }
+    </div>
+  </section>
+
+  <section class="section">
+    <h2>In streaming</h2>
+    <div class="section__grid">
+      @for (movie of inStreaming(); track movie.id) {
+        <app-movie-card [movie]="movie"></app-movie-card>
+      } @empty {
+        <p class="section__placeholder">Nessun contenuto in streaming al momento.</p>
+      }
+    </div>
+  </section>
+}
