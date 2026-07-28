@@ -43,8 +43,8 @@ export class Catalogo implements OnInit {
     effect(() => {
       const allMovies = this.movies();
       if (allMovies.length > 0) {
-        const uniqueGenres = [...new Set(allMovies.map(m => m.genre))].sort();
-        const uniqueYears = [...new Set(allMovies.map(m => m.releaseYear))].sort((a, b) => b - a);
+        const uniqueGenres = [...new Set(allMovies.map((m) => m.genre))].sort();
+        const uniqueYears = [...new Set(allMovies.map((m) => m.releaseYear))].sort((a, b) => b - a);
         this.genres.set(uniqueGenres);
         this.years.set(uniqueYears);
         this.applyFilters(this.filterForm.value);
@@ -55,33 +55,39 @@ export class Catalogo implements OnInit {
   ngOnInit() {
     this.movieService.getMovies();
 
-    this.filterForm.valueChanges.pipe(
-      debounceTime(300),
-      takeUntilDestroyed(this.destroyRef),
-    ).subscribe(values => {
-      this.applyFilters(values);
-    });
+    this.filterForm.valueChanges
+      .pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef))
+      .subscribe((values) => {
+        this.applyFilters(values);
+      });
   }
 
-  private applyFilters(values: Partial<{ title: string | null; genre: string | null; releaseYear: string | null; availability: string | null }>): void {
+  private applyFilters(
+    values: Partial<{
+      title: string | null;
+      genre: string | null;
+      releaseYear: string | null;
+      availability: string | null;
+    }>,
+  ): void {
     const allMovies = this.movieService.movies();
     let result = [...allMovies];
 
     if (values.title) {
       const term = values.title.toLowerCase();
-      result = result.filter(m => m.title.toLowerCase().includes(term));
+      result = result.filter((m) => m.title.toLowerCase().includes(term));
     }
 
     if (values.genre) {
-      result = result.filter(m => m.genre === values.genre);
+      result = result.filter((m) => m.genre === values.genre);
     }
 
     if (values.releaseYear) {
-      result = result.filter(m => m.releaseYear === Number(values.releaseYear));
+      result = result.filter((m) => m.releaseYear === Number(values.releaseYear));
     }
 
     if (values.availability) {
-      result = result.filter(m => m.availability === values.availability);
+      result = result.filter((m) => m.availability === values.availability);
     }
 
     this.filteredMovies.set(result);

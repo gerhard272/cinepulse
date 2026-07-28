@@ -13,10 +13,10 @@ import { Showtime, Prenotazione as PrenotazioneModel } from '../../models/showti
   styleUrl: './prenotazione.css',
 })
 export class Prenotazione implements OnInit {
-  private fb = inject(FormBuilder);
-  private service = inject(PrenotazioneService);
-  private route = inject(ActivatedRoute);
-  private router = inject(Router);
+  private readonly fb = inject(FormBuilder);
+  private readonly service = inject(PrenotazioneService);
+  private readonly route = inject(ActivatedRoute);
+  private readonly router = inject(Router);
 
   bookingForm!: FormGroup;
   showtimes = signal<Showtime[]>([]);
@@ -47,7 +47,9 @@ export class Prenotazione implements OnInit {
 
     // keep signals in sync with form controls so computed() updates
     this.bookingForm.get('ticketType')?.valueChanges.subscribe((v) => this.ticketTypeSignal.set(v));
-    this.bookingForm.get('quantity')?.valueChanges.subscribe((v) => this.quantitySignal.set(Number(v)));
+    this.bookingForm
+      .get('quantity')
+      ?.valueChanges.subscribe((v) => this.quantitySignal.set(Number(v)));
     const movieIdParam = this.route.snapshot.paramMap.get('movieId');
 
     const showtimes$ = movieIdParam

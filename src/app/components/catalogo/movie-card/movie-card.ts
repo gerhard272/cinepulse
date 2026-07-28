@@ -1,5 +1,4 @@
 import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
-import { TitleCasePipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
 import { Movie } from '../../../models/models';
 import { WatchlistService } from '../../watchlist/watchlist.service';
@@ -7,7 +6,7 @@ import { WatchlistService } from '../../watchlist/watchlist.service';
 @Component({
   selector: 'app-movie-card',
   standalone: true,
-  imports: [TitleCasePipe, RouterLink],
+  imports: [RouterLink],
   templateUrl: './movie-card.html',
   styleUrl: './movie-card.css',
 })

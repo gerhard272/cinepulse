@@ -13,17 +13,20 @@ import { MovieCard } from '../catalogo/movie-card/movie-card';
 })
 export class Watchlist implements OnInit {
   public watchlistService = inject(WatchlistService);
-  private movieService = inject(MovieService);
+  private readonly movieService = inject(MovieService);
 
   ngOnInit(): void {
     this.movieService.getMovies();
   }
 
   get watchlistMovies() {
-    return this.watchlistService.watchlist().map((item) => ({
-      ...item,
-      movie: this.movieService.movies().find((movie) => movie.id === item.movieId),
-    })).filter((item) => item.movie);
+    return this.watchlistService
+      .watchlist()
+      .map((item) => ({
+        ...item,
+        movie: this.movieService.movies().find((movie) => movie.id === item.movieId),
+      }))
+      .filter((item) => item.movie);
   }
 
   onRemoveFromWatchlist(movieId: string): void {

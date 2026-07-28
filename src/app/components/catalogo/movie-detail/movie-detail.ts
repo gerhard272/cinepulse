@@ -14,25 +14,26 @@ import { Movie } from '../../../models/models';
   styleUrl: './movie-detail.css',
 })
 export class MovieDetail implements OnInit {
-  private route = inject(ActivatedRoute);
-  private movieService = inject(MovieService);
-  private sanitizer = inject(DomSanitizer);
-  private destroyRef = inject(DestroyRef);
+  private readonly route = inject(ActivatedRoute);
+  private readonly movieService = inject(MovieService);
+  private readonly sanitizer = inject(DomSanitizer);
+  private readonly destroyRef = inject(DestroyRef);
 
   movie = signal<Movie | null>(null);
   loading = signal<boolean>(true);
 
   ngOnInit() {
     const id = this.route.snapshot.paramMap.get('id')!;
-    this.movieService.getMovieById(id).pipe(
-      takeUntilDestroyed(this.destroyRef),
-    ).subscribe(movie => {
-      this.movie.set(movie ?? null);
-      this.loading.set(false);
-    });
+    this.movieService
+      .getMovieById(id)
+      .pipe(takeUntilDestroyed(this.destroyRef))
+      .subscribe((movie) => {
+        this.movie.set(movie ?? null);
+        this.loading.set(false);
+      });
   }
 
   sanitizeUrl(url: string): SafeResourceUrl {
-    return this.sanitizer.bypassSecurityTrustResourceUrl(url);
+    return this.sanitizer.bypassSecurityTrustResourceUrl!(url);
   }
 }

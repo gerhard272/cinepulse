@@ -15,8 +15,8 @@ import { MovieCard } from '../catalogo/movie-card/movie-card';
   styleUrl: './segnala.css',
 })
 export class Segnala implements OnInit {
-  private fb = inject(FormBuilder);
-  private movieService = inject(MovieService);
+  private readonly fb = inject(FormBuilder);
+  private readonly movieService = inject(MovieService);
 
   public segnalaForm: FormGroup = this.fb.group({
     nome: ['', [Validators.required]],
