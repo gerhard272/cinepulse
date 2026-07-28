@@ -2,25 +2,25 @@ import { Injectable, signal, computed } from '@angular/core';
 import { WatchlistItem } from '../../models/models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class WatchlistService {
-  private watchlistSignal = signal<WatchlistItem[]>([]);
+  private readonly watchlistSignal = signal<WatchlistItem[]>([]);
 
   public readonly watchlist = computed(() => this.watchlistSignal());
   public readonly isWatchlistEmpty = computed(() => this.watchlistSignal().length === 0);
 
   isInWatchlist(movieId: string): boolean {
-    return this.watchlistSignal().some(item => item.movieId === movieId);
+    return this.watchlistSignal().some((item) => item.movieId === movieId);
   }
 
   constructor() {}
 
   addToWatchlist(item: WatchlistItem) {
-    this.watchlistSignal.update(items => [...items, item]);
+    this.watchlistSignal.update((items) => [...items, item]);
   }
 
   removeFromWatchlist(movieId: string) {
-    this.watchlistSignal.update(items => items.filter(item => item.movieId !== movieId));
+    this.watchlistSignal.update((items) => items.filter((item) => item.movieId !== movieId));
   }
 }

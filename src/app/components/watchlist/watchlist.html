@@ -9,9 +9,13 @@
     <div class="watchlist-grid">
       @for (item of watchlistMovies; track item.movieId) {
         <div class="watchlist-card">
-          <app-movie-card [movie]="item.movie!" [showWatchlistButton]="false" (addToWatchlist)="onRemoveFromWatchlist($event)"></app-movie-card>
+          <app-movie-card
+            [movie]="item.movie!"
+            [showWatchlistButton]="false"
+            (addToWatchlist)="onRemoveFromWatchlist($event)"
+          ></app-movie-card>
           <div class="watchlist-meta">
-            <span>Aggiunto il: {{ item.addedAt }}</span>
+            <span>Aggiunto il: {{ item.addedAt | date: 'dd/MM/yyyy' }}</span>
             <button type="button" (click)="onRemoveFromWatchlist(item.movieId)">Rimuovi</button>
           </div>
         </div>
