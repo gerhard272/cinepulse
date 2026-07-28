@@ -1,5 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-
+import { provideRouter } from '@angular/router';
 import { Conferma } from './conferma';
 
 describe('Conferma', () => {
@@ -9,11 +9,12 @@ describe('Conferma', () => {
   beforeEach(async () => {
     await TestBed.configureTestingModule({
       imports: [Conferma],
+      providers: [provideRouter([])],
     }).compileComponents();
 
     fixture = TestBed.createComponent(Conferma);
     component = fixture.componentInstance;
-    await fixture.whenStable();
+    fixture.detectChanges();
   });
 
   it('should create', () => {
