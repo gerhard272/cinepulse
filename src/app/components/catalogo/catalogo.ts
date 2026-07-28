@@ -1,11 +1,11 @@
 import { Component, OnInit, inject, signal, effect, DestroyRef } from '@angular/core';
-import { ReactiveFormsModule, FormGroup, FormControl } from '@angular/forms';
+import { ReactiveFormsModule, FormBuilder } from '@angular/forms';
 import { takeUntilDestroyed } from '@angular/core/rxjs-interop';
 import { debounceTime } from 'rxjs/operators';
 import { MovieService } from '../../services/movie';
 import { WatchlistService } from '../watchlist/watchlist.service';
 import { MovieCard } from './movie-card/movie-card';
-import { Movie, WatchlistItem } from '../../models/models';
+import { Movie } from '../../models/models';
 
 @Component({
   selector: 'app-catalogo',
@@ -18,12 +18,13 @@ export class Catalogo implements OnInit {
   private readonly movieService = inject(MovieService);
   readonly watchlistService = inject(WatchlistService);
   private readonly destroyRef = inject(DestroyRef);
+  private readonly fb = inject(FormBuilder);
 
-  filterForm = new FormGroup({
-    title: new FormControl(''),
-    genre: new FormControl(''),
-    releaseYear: new FormControl(''),
-    availability: new FormControl(''),
+  filterForm = this.fb.group({
+    title: [''],
+    genre: [''],
+    releaseYear: [''],
+    availability: [''],
   });
 
   filteredMovies = signal<Movie[]>([]);
@@ -42,8 +43,8 @@ export class Catalogo implements OnInit {
     effect(() => {
       const allMovies = this.movies();
       if (allMovies.length > 0) {
-        const uniqueGenres = [...new Set(allMovies.map(m => m.genre))].sort();
-        const uniqueYears = [...new Set(allMovies.map(m => m.releaseYear))].sort((a, b) => b - a);
+        const uniqueGenres = [...new Set(allMovies.map((m) => m.genre))].sort();
+        const uniqueYears = [...new Set(allMovies.map((m) => m.releaseYear))].sort((a, b) => b - a);
         this.genres.set(uniqueGenres);
         this.years.set(uniqueYears);
         this.applyFilters(this.filterForm.value);
@@ -54,33 +55,39 @@ export class Catalogo implements OnInit {
   ngOnInit() {
     this.movieService.getMovies();
 
-    this.filterForm.valueChanges.pipe(
-      debounceTime(300),
-      takeUntilDestroyed(this.destroyRef),
-    ).subscribe(values => {
-      this.applyFilters(values);
-    });
+    this.filterForm.valueChanges
+      .pipe(debounceTime(300), takeUntilDestroyed(this.destroyRef))
+      .subscribe((values) => {
+        this.applyFilters(values);
+      });
   }
 
-  private applyFilters(values: Partial<{ title: string | null; genre: string | null; releaseYear: string | null; availability: string | null }>): void {
+  private applyFilters(
+    values: Partial<{
+      title: string | null;
+      genre: string | null;
+      releaseYear: string | null;
+      availability: string | null;
+    }>,
+  ): void {
     const allMovies = this.movieService.movies();
     let result = [...allMovies];
 
     if (values.title) {
       const term = values.title.toLowerCase();
-      result = result.filter(m => m.title.toLowerCase().includes(term));
+      result = result.filter((m) => m.title.toLowerCase().includes(term));
     }
 
     if (values.genre) {
-      result = result.filter(m => m.genre === values.genre);
+      result = result.filter((m) => m.genre === values.genre);
     }
 
     if (values.releaseYear) {
-      result = result.filter(m => m.releaseYear === Number(values.releaseYear));
+      result = result.filter((m) => m.releaseYear === Number(values.releaseYear));
     }
 
     if (values.availability) {
-      result = result.filter(m => m.availability === values.availability);
+      result = result.filter((m) => m.availability === values.availability);
     }
 
     this.filteredMovies.set(result);
