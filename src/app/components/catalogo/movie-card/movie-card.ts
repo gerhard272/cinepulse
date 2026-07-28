@@ -15,6 +15,7 @@ export class MovieCard {
   private readonly watchlistService = inject(WatchlistService);
 
   @Input({ required: true }) movie!: Movie;
+  @Input() showWatchlistButton = true;
   @Output() addToWatchlist = new EventEmitter<string>();
 
   get isInWatchlist(): boolean {

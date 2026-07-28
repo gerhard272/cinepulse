@@ -6,16 +6,18 @@
       class="poster"
     />
     <div class="card-overlay">
-      <button
-        class="watchlist-btn"
-        [class.active]="isInWatchlist"
-        (click)="onAddToWatchlist($event)"
-        [title]="isInWatchlist ? 'Rimuovi dalla Watchlist' : 'Aggiungi alla Watchlist'"
-      >
-        <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" [attr.fill]="isInWatchlist ? 'currentColor' : 'none'" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
-        </svg>
-      </button>
+      @if (showWatchlistButton) {
+        <button
+          class="watchlist-btn"
+          [class.active]="isInWatchlist"
+          (click)="onAddToWatchlist($event)"
+          [title]="isInWatchlist ? 'Rimuovi dalla Watchlist' : 'Aggiungi alla Watchlist'"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" [attr.fill]="isInWatchlist ? 'currentColor' : 'none'" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="m19 21-7-4-7 4V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16z"></path>
+          </svg>
+        </button>
+      }
     </div>
     @if (movie.rating) {
       <span class="rating-badge">{{ movie.rating }}</span>
