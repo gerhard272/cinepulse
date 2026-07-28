@@ -3,11 +3,12 @@ import { Component, inject, OnInit } from '@angular/core';
 import { WatchlistService } from './watchlist.service';
 import { MovieService } from '../../services/movie';
 import { MovieCard } from '../catalogo/movie-card/movie-card';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-watchlist',
   standalone: true,
-  imports: [MovieCard],
+  imports: [MovieCard, DatePipe],
   templateUrl: './watchlist.html',
   styleUrl: './watchlist.css',
 })
