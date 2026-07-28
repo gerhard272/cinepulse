@@ -41,11 +41,9 @@ export class Prenotazione implements OnInit {
 
   ngOnInit(): void {
     this.initForm();
-    // initialize reactive signals from the form
     this.ticketTypeSignal.set(this.bookingForm.get('ticketType')?.value ?? 'intero');
     this.quantitySignal.set(Number(this.bookingForm.get('quantity')?.value) || 1);
 
-    // keep signals in sync with form controls so computed() updates
     this.bookingForm.get('ticketType')?.valueChanges.subscribe((v) => this.ticketTypeSignal.set(v));
     this.bookingForm
       .get('quantity')
