@@ -80,8 +80,10 @@ export class PrenotazioneService {
   }
 
   getShowtimesByMovie(movieId: number): Observable<Showtime[]> {
+    const normalizedMovieId = String(movieId);
+
     return this.getShowtimes().pipe(
-      map(showtimes => showtimes.filter(s => s.movieId === Number(movieId)))
+      map((showtimes) => showtimes.filter((s) => String(s.movieId) === normalizedMovieId)),
     );
   }
 

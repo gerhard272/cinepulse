@@ -48,10 +48,11 @@ export class Prenotazione implements OnInit {
     this.bookingForm
       .get('quantity')
       ?.valueChanges.subscribe((v) => this.quantitySignal.set(Number(v)));
-    const movieIdParam = this.route.snapshot.paramMap.get('movieId');
+    const movieIdParam = this.route.snapshot.paramMap.get('id') ?? this.route.snapshot.paramMap.get('movieId');
+    const parsedMovieId = movieIdParam ? Number(movieIdParam) : NaN;
 
-    const showtimes$ = movieIdParam
-      ? this.service.getShowtimesByMovie(Number(movieIdParam))
+    const showtimes$ = !Number.isNaN(parsedMovieId)
+      ? this.service.getShowtimesByMovie(parsedMovieId)
       : this.service.getShowtimes();
 
     showtimes$.subscribe((data) => {
