@@ -8,74 +8,97 @@
     </div>
 
     <form [formGroup]="bookingForm" (ngSubmit)="confirmBooking()" class="booking-form">
-
       <!-- Selezione Data & Ora -->
       <div class="form-group">
-    <label for="showtimeSelect" class="form-label">Data e Orario Spettacolo</label>
-    <select id="showtimeSelect" formControlName="showtimeId" class="form-select">
-      <option value="" disabled>-- Seleziona orario --</option>
-      @for (st of showtimes(); track st.id) {
-        <option [value]="st.id">
-          {{ st.title }} — {{ st.date }} {{ st.time }} | {{ st.hall }} ({{ st.availableSeats }} posti)
-        </option>
-      }
-    </select>
-    @if (bookingForm.get('showtimeId')?.invalid && bookingForm.get('showtimeId')?.touched) {
-      <span class="error-msg">Seleziona un orario valido.</span>
-    }
-  </div>
+        <label for="showtimeSelect" class="form-label">Data e Orario Spettacolo</label>
+        <select id="showtimeSelect" formControlName="showtimeId" class="form-select">
+          <option value="" disabled>-- Seleziona orario --</option>
+          @for (st of showtimes(); track st.id) {
+            <option [value]="st.id">
+              {{ st.title }} — {{ st.date }} {{ st.time }} | {{ st.hall }} ({{
+                st.availableSeats
+              }}
+              posti)
+            </option>
+          }
+        </select>
+        @if (bookingForm.get('showtimeId')?.invalid && bookingForm.get('showtimeId')?.touched) {
+          <span class="error-msg">Seleziona un orario valido.</span>
+        }
+      </div>
 
-  <!-- Selezione Tipo Biglietto -->
-  <div class="form-group">
-    <label class="form-label">Tipo Biglietto</label>
-    <div class="radio-grid">
-      @for (option of ticketOptions; track option.value) {
-        <label class="radio-card" [class.selected]="bookingForm.get('ticketType')?.value === option.value">
-          <input type="radio" formControlName="ticketType" [value]="option.value" class="radio-input" />
-          <div class="radio-content">
-            <span class="ticket-title">{{ option.label }}</span>
-            <span class="ticket-price">
-              @if (selectedShowtime(); as st) {
-                {{ st.prices[option.value] | currency:'EUR' }}
-              } @else {
-                --
-              }
-            </span>
-          </div>
+      <!-- Selezione Tipo Biglietto -->
+      <div class="form-group">
+        <label class="form-label">Tipo Biglietto</label>
+        <div class="radio-grid">
+          @for (option of ticketOptions; track option.value) {
+            <label
+              class="radio-card"
+              [class.selected]="bookingForm.get('ticketType')?.value === option.value"
+            >
+              <input
+                type="radio"
+                formControlName="ticketType"
+                [value]="option.value"
+                class="radio-input"
+              />
+              <div class="radio-content">
+                <span class="ticket-title">{{ option.label }}</span>
+                <span class="ticket-price">
+                  @if (selectedShowtime(); as st) {
+                    {{ st.prices[option.value] | currency: 'EUR' }}
+                  } @else {
+                    --
+                  }
+                </span>
+              </div>
+            </label>
+          }
+        </div>
+      </div>
+
+      <!-- Selezione Numero Posti -->
+      <div class="form-group">
+        <label class="form-label">
+          Numero Posti
+          @if (selectedShowtime(); as st) {
+            <span style="font-weight: 400; color: #64748b">(max {{ st.availableSeats }})</span>
+          }
         </label>
-      }
-    </div>
-  </div>
-
-  <!-- Selezione Numero Posti -->
-  <div class="form-group">
-    <label class="form-label">
-      Numero Posti
-      @if (selectedShowtime(); as st) {
-        <span style="font-weight:400; color:#64748b;">(max {{ st.availableSeats }})</span>
-      }
-    </label>
-    <input type="number" formControlName="quantity" class="form-input" min="1" [max]="selectedShowtime()?.availableSeats || 1" />
-    @if (bookingForm.get('quantity')?.touched) {
-      @if (bookingForm.get('quantity')?.errors?.['min']) {
-        <span class="error-msg">Seleziona almeno 1 posto.</span>
-      } @else if (bookingForm.get('quantity')?.errors?.['max']) {
-        <span class="error-msg">Non sono disponibili più di {{ selectedShowtime()?.availableSeats }} posti.</span>
-      } @else if (bookingForm.get('quantity')?.errors?.['required']) {
-        <span class="error-msg">Inserisci il numero di posti.</span>
-      }
-    }
-  </div>
+        <input
+          type="number"
+          formControlName="quantity"
+          class="form-input"
+          min="1"
+          [max]="selectedShowtime()?.availableSeats || 1"
+        />
+        @if (bookingForm.get('quantity')?.touched) {
+          @if (bookingForm.get('quantity')?.errors?.['min']) {
+            <span class="error-msg">Seleziona almeno 1 posto.</span>
+          } @else if (bookingForm.get('quantity')?.errors?.['max']) {
+            <span class="error-msg"
+              >Non sono disponibili più di {{ selectedShowtime()?.availableSeats }} posti.</span
+            >
+          } @else if (bookingForm.get('quantity')?.errors?.['required']) {
+            <span class="error-msg">Inserisci il numero di posti.</span>
+          }
+        }
+      </div>
 
       <!-- Riepilogo e Conferma -->
       <div class="summary-footer">
         <div class="price-container">
           <span class="price-label">Totale</span>
-          <span class="price-amount">{{ totalPrice() | currency:'EUR' }}</span>
+          @if (bookingForm.get('quantity')?.valid && selectedShowtime()) {
+            <span class="price-amount">{{ totalPrice() | currency: 'EUR' }}</span>
+          } @else {
+            <span class="price-amount">--</span>
+          }
         </div>
-        <button type="submit" class="btn-submit" [disabled]="bookingForm.invalid">Conferma Prenotazione</button>
+        <button type="submit" class="btn-submit" [disabled]="bookingForm.invalid">
+          Conferma Prenotazione
+        </button>
       </div>
-
     </form>
   </div>
 </section>
